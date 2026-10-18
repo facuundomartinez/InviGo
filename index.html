@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>inviGo — Invitaciones web interactivas</title>
+  <link rel="icon" href="logo.jpg" type="image/jpeg">
+  <meta name="description" content="Invitaciones web interactivas pensadas al detalle: elegantes, personalizadas y listas para compartir.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+ <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container navbar__inner">
+      <a href="#inicio" class="logo-wrapper">
+        <img src="logo.jpg" alt="Logo inviGo" class="logo-img">
+        <span class="logo">inviGo</span>
+      </a>
+      <a href="#contacto" class="btn btn--outline">Contacto</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero-container">
+  <!-- Columna izquierda: Texto -->
+  <div class="hero-text">
+    <p class="eyebrow">DISEÑO DIGITAL</p>
+    <h1>Encontrá el diseño para<br>tu evento</h1>
+    <p class="hero-subtitle">Invitaciones web interactivas pensadas al detalle: elegantes, personalizadas y listas para compartir.</p>
+    <!-- Si querés sumar el botón de contacto acá, podés agregarlo -->
+  </div>
+
+  <!-- Columna derecha: Imágenes -->
+  <div class="hero-gallery">
+    <!-- Usamos los nombres exactos de tus archivos -->
+    <img src="PAULA Y RODRIGO.jpg" alt="Casamiento Paula y Rodrigo" class="float-img img-1">
+    <img src="MARTINA Y LUCA.jpg" alt="Casamiento Martina y Luca" class="float-img img-2">
+    <img src="VALENTINA.jpg" alt="15 Años Valentina" class="float-img img-3">
+  </div>
+</section>
+
+    <!-- MÓDULOS -->
+    <section class="section" id="modulos">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow">LO QUE PUEDE INCLUIR</p>
+          <h2 class="section__title">Todo lo que necesitás en un solo lugar</h2>
+          <p class="section__subtitle">Cada invitación incluye estos módulos.</p>
+        </header>
+
+        <div class="grid grid--modules">
+
+          <article class="card module">
+            <div class="module__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 9"/></svg>
+            </div>
+            <h3 class="module__title">PORTADA ANIMADA</h3>
+            <p class="module__text">Fotos, nombres, fecha y mensaje personalizado con animaciones suaves.</p>
+          </article>
+
+          <article class="card module">
+            <div class="module__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2"/><path d="M9 2h6"/></svg>
+            </div>
+            <h3 class="module__title">CUENTA REGRESIVA</h3>
+            <p class="module__text">Contador en vivo hasta el día del evento. Con botón para agregar al calendario.</p>
+          </article>
+
+          <article class="card module">
+            <div class="module__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg>
+            </div>
+            <h3 class="module__title">RSVP ONLINE</h3>
+            <p class="module__text">Los invitados confirman asistencia con menú, acompañantes y comentarios.</p>
+          </article>
+
+          <article class="card module">
+            <div class="module__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 5.5a3 3 0 010 5.5"/><path d="M18 14.3c1.8.8 3 2.6 3 4.7"/></svg>
+            </div>
+            <h3 class="module__title">GESTIÓN DE INVITADOS</h3>
+            <p class="module__text">Agregá, editá y seguí el estado de cada invitado desde un panel centralizado.</p>
+          </article>
+
+          <article class="card module">
+            <div class="module__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 10-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            </div>
+            <h3 class="module__title">UBICACIONES Y MAPA</h3>
+            <p class="module__text">Civil, ceremonia y festejo con dirección y link directo a Google Maps.</p>
+          </article>
+
+          <article class="card module">
+            <div class="module__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M5 12v8a1 1 0 001 1h12a1 1 0 001-1v-8"/><path d="M12 8c-2.5 0-4.5-1-4.5-2.5S9 3 10.5 3C12 3 12 6 12 8zm0 0c2.5 0 4.5-1 4.5-2.5S15 3 13.5 3C12 3 12 6 12 8z"/></svg>
+            </div>
+            <h3 class="module__title">LISTA DE REGALOS</h3>
+            <p class="module__text">CBU, alias, Mercado Pago o lista de productos. Todo centralizado.</p>
+          </article>
+
+          <article class="card module">
+            <div class="module__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>
+            </div>
+            <h3 class="module__title">MÚSICA DE FONDO</h3>
+            <p class="module__text">Una canción que suena al abrir la invitación. Le da el toque especial.</p>
+          </article>
+
+          <article class="card module">
+            <div class="module__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M9 3l-6 3v4l3 1v10h12V11l3-1V6l-6-3c-.5 1.8-1.8 3-3 3S9.5 4.8 9 3z"/></svg>
+            </div>
+            <h3 class="module__title">DRESS CODE Y MÁS INFO</h3>
+            <p class="module__text">Sección de reglas, restricciones y comentarios.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+   <!-- PORTAFOLIO -->
+    <section class="section section--alt" id="portafolio">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow">PORTAFOLIO</p>
+          <h2 class="section__title">Mirá nuestros diseños en acción</h2>
+          <p class="section__subtitle">Explorá las demos y elegí la edición que mejor se adapte a tu evento.</p>
+        </header>
+
+        <div class="grid grid--portfolio">
+
+          <!-- DEMO 1 -->
+          <article class="card demo demo--visual">
+            <div class="demo__image-container">
+              <img src="captura-premium.jpg" alt="Invitación Premium 15 Años" class="demo__img">
+            </div>
+            <div class="demo__body">
+              <span class="demo__tag">CASAMIENTO</span>
+              <h3 class="demo__title">Edición Premium</h3>
+              <p class="demo__text">Estilo sofisticado y romántico, ideal para bodas inolvidables.</p>
+              <button onclick="abrirDemo('01_casamiento/index.html')" class="btn btn--outline">Ver demo interactiva</button>
+            </div>
+          </article>
+
+          <!-- DEMO 2 -->
+          <article class="card demo demo--visual">
+            <div class="demo__image-container">
+              <img src="captura-elegance.jpg" alt="Invitación Elegante de 15 Años" class="demo__img">
+            </div>
+            <div class="demo__body">
+              <span class="demo__tag">15 AÑOS</span>
+              <h3 class="demo__title">Edición Elegance</h3>
+              <p class="demo__text">Estilo sofisticado y moderno, para un dia especial.</p>
+              <button onclick="abrirDemo('00_15valen/index.html')" class="btn btn--outline">Ver demo interactiva</button>
+            </div>
+          </article>
+
+          <!-- DEMO 3 -->
+          <article class="card demo demo--visual">
+            <div class="demo__image-container">
+              <img src="captura-Basica.jpg" alt="Invitación Basica" class="demo__img">
+            </div>
+            <div class="demo__body">
+              <span class="demo__tag">Eventos</span>
+              <h3 class="demo__title">Edición Basica</h3>
+              <p class="demo__text">Simple, limpia y atemporal. Lo esencial, excelentemente resuelto.</p>
+              <button onclick="abrirDemo('05_15%20base/index.html')" class="btn btn--outline">Ver demo interactiva</button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container container--narrow">
+        <header class="section__head">
+          <h2 class="section__title">Preguntas frecuentes</h2>
+        </header>
+
+        <div class="faq">
+
+          <div class="faq__item">
+            <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-1" id="faq-btn-1">
+              <span>¿Qué es una invitación digital?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer" id="faq-1" role="region" aria-labelledby="faq-btn-1">
+              <div class="faq__answer-inner">
+                <p>Es una invitación web personalizada que podés enviar a cada invitado por WhatsApp, Instagram o donde quieras. No hace falta imprimir nada. Vos compartís tu link personalizado y listo.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-2" id="faq-btn-2">
+              <span>¿Cuánto tiempo tarda en estar lista?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer" id="faq-2" role="region" aria-labelledby="faq-btn-2">
+              <div class="faq__answer-inner">
+                <p>Completás el formulario con los datos del evento, elegís el diseño, y listo terminamos de diseñar los ultimos detalles. El diseño puede estar en 24hs</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" type="button" aria-expanded="false" aria-controls="faq-3" id="faq-btn-3">
+              <span>¿Cómo funciona el RSVP?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer" id="faq-3" role="region" aria-labelledby="faq-btn-3">
+              <div class="faq__answer-inner">
+                <p>Cada invitado puede confirmar o rechazar su asistencia directamente desde la invitación, sin necesidad de crear una cuenta. Vos ves las respuestas en tiempo real desde tu panel.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+   <!-- CONTACTO -->
+    <section class="section section--contact" id="contacto">
+      <div class="container">
+        <div class="contact card">
+          <p class="eyebrow">CONTACTO</p>
+          <h2 class="section__title">Hablemos de tu evento</h2>
+          <ul class="contact__list">
+            
+            <!-- 1. WHATSAPP DIRECTO -->
+            <li>
+              <span class="contact__label">WhatsApp</span>
+              <a class="contact__value" href="https://wa.me/5492617009138?text=Hola%20inviGo!%20Quiero%20consultar%20por%20una%20invitaci%C3%B3n%20web." target="_blank" rel="noopener">+54 9 261 700-9138</a>
+            </li>
+            
+            <!-- 2. INSTAGRAM DIRECTO -->
+            <li>
+              <span class="contact__label">Instagram</span>
+              <a class="contact__value" href="https://instagram.com/invigo.mdz" target="_blank" rel="noopener">@invigo.mdz</a>
+            </li>
+            
+            <!-- 3. GMAIL DIRECTO -->
+            <li>
+              <span class="contact__label">Email</span>
+              <a class="contact__value" href="mailto:invitacionGo@gmail.com">invitacionGo@gmail.com</a>
+            </li>
+
+          </ul>
+          
+          <!-- BOTÓN PRINCIPAL A WHATSAPP -->
+          <a href="https://wa.me/5492617009138?text=Hola%20inviGo!%20Quiero%20consultar%20por%20una%20invitaci%C3%B3n%20web." class="btn btn--solid btn--lg" target="_blank" rel="noopener">Enviar WhatsApp</a>
+          
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <span id="year">2026</span> inviGo. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Acordeón FAQ
+    (function () {
+      var items = document.querySelectorAll('.faq__item');
+
+      items.forEach(function (item) {
+        var btn = item.querySelector('.faq__question');
+        var panel = item.querySelector('.faq__answer');
+
+        btn.addEventListener('click', function () {
+          var isOpen = item.classList.contains('is-open');
+
+          // Cierra los demás (un solo ítem abierto a la vez)
+          items.forEach(function (other) {
+            other.classList.remove('is-open');
+            other.querySelector('.faq__question').setAttribute('aria-expanded', 'false');
+            other.querySelector('.faq__answer').style.maxHeight = null;
+          });
+
+          if (!isOpen) {
+            item.classList.add('is-open');
+            btn.setAttribute('aria-expanded', 'true');
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+          }
+        });
+      });
+
+      // Reajusta altura si cambia el tamaño de la ventana
+      window.addEventListener('resize', function () {
+        var open = document.querySelector('.faq__item.is-open .faq__answer');
+        if (open) open.style.maxHeight = open.scrollHeight + 'px';
+      });
+    })();
+  </script>
+<!-- VENTANA MODAL PARA DEMOS -->
+    <div id="demoModal" class="modal-overlay">
+      <div class="modal-window">
+        <button class="modal-close" onclick="cerrarDemo()">&times;</button>
+        <iframe id="demoFrame" src="" frameborder="0"></iframe>
+      </div>
+    </div>
+
+    <!-- SCRIPT QUE HACE FUNCIONAR LA VENTANITA -->
+    <script>
+      function abrirDemo(url) {
+        document.getElementById('demoFrame').src = url; 
+        document.getElementById('demoModal').style.display = 'flex'; 
+        document.body.style.overflow = 'hidden'; 
+      }
+
+      function cerrarDemo() {
+        document.getElementById('demoModal').style.display = 'none'; 
+        document.getElementById('demoFrame').src = ''; 
+        document.body.style.overflow = 'auto'; 
+      }
+
+      window.onclick = function(event) {
+        let modal = document.getElementById('demoModal');
+        if (event.target === modal) {
+          cerrarDemo();
+        }
+      }
+    </script>
+</body>
+</html>

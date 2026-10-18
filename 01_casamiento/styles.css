@@ -1,0 +1,535 @@
+/* ==========================================================
+   INVITACIÓN DE CASAMIENTO · Estilos
+   Mobile-first · Minimalista, elegante, toque romántico
+   NOTA: todo el contenido es visible por defecto. Las animaciones
+   (AOS) se activan por JS y nunca ocultan el contenido si fallan.
+   ========================================================== */
+
+/* ---------- 1. Variables de diseño ---------- */
+:root {
+  /* Paleta: crudo, beige y tonos tierra / pastel */
+  --bg: #f7f2ea;
+  --bg-soft: #fbf8f3;
+  --card: #fffdf9;
+  --ink: #3d3530;          /* texto principal */
+  --ink-soft: #7a6e64;     /* texto secundario */
+  --accent: #b08968;       /* tierra */
+  --accent-soft: #d9b8a6;  /* rosa empolvado */
+  --line: rgba(176, 137, 104, 0.35);
+
+  --shadow-soft: 0 10px 40px -12px rgba(120, 90, 60, 0.18);
+  --radius: 4px;
+
+  --font-title: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Montserrat", system-ui, sans-serif;
+
+  --max-w: 520px;
+}
+
+/* ---------- 2. Reset y base ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink);
+  background-color: var(--bg);
+  background-image: linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Todo el contenido por encima del canvas de pétalos */
+main, footer { position: relative; z-index: 1; }
+
+/* ---------- 3. Canvas de pétalos ---------- */
+#petals-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Subimos el z-index a 9000 para que floten SOBRE la página, 
+     pero debajo de la caja de presentación que tiene 9999 */
+  z-index: 10000;
+  /* Fundamental: esto hace que el mouse ignore los pétalos 
+     y puedas hacer clic en los botones que están abajo */
+  pointer-events: none; 
+}
+
+/* ---------- 4. Botón de música ---------- */
+.music-toggle {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(255, 253, 249, 0.85);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  opacity: 0.85;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.music-toggle:hover { opacity: 1; transform: scale(1.05); }
+.music-toggle svg { width: 16px; height: 16px; fill: var(--accent); grid-area: 1 / 1; }
+.music-toggle .icon-pause { display: none; }
+.music-toggle[aria-pressed="true"] .icon-play { display: none; }
+.music-toggle[aria-pressed="true"] .icon-pause { display: block; }
+
+/* ---------- 5. Hero ---------- */
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 28px 100px;
+  position: relative;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+
+.names {
+  font-family: var(--font-title);
+  font-weight: 300;
+  font-size: 56px;
+  font-size: clamp(52px, 16vw, 88px);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
+.names .amp {
+  display: block;
+  font-style: italic;
+  font-size: 0.55em;
+  color: var(--accent-soft);
+  margin: 4px 0;
+}
+
+.divider {
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+  margin: 32px 0 24px;
+}
+
+.date {
+  font-family: var(--font-title);
+  font-size: 26px;
+  letter-spacing: 0.25em;
+  color: var(--ink);
+}
+
+.quote {
+  font-family: var(--font-title);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 19px;
+  color: var(--ink-soft);
+  margin-top: 28px;
+  max-width: 320px;
+}
+
+/* Indicador de scroll */
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  display: block;
+}
+.scroll-hint span {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  width: 3px;
+  height: 7px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: var(--accent);
+  animation: scrollDot 2.2s ease-in-out infinite;
+}
+@keyframes scrollDot {
+  0%   { opacity: 0; transform: translateY(0); }
+  40%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(14px); }
+}
+
+/* ---------- 6. Secciones genéricas ---------- */
+.section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 90px 24px;
+  text-align: center;
+}
+
+.section-title {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-size: 38px;
+  line-height: 1.15;
+  color: var(--ink);
+}
+.section-sub {
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 14px 0 48px;
+}
+
+/* ---------- 7. Tarjetas de cronograma ---------- */
+.cards { display: grid; gap: 24px; }
+
+.card {
+  background: var(--card);
+  border: 1px solid rgba(176, 137, 104, 0.15);
+  border-radius: var(--radius);
+  padding: 40px 28px;
+  box-shadow: var(--shadow-soft);
+}
+.card-time {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.card-title {
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-size: 32px;
+  margin-bottom: 14px;
+}
+.card-place { font-weight: 400; }
+.card-address { color: var(--ink-soft); font-size: 14px; margin-bottom: 28px; }
+
+/* Ghost button (borde fino) */
+.btn-ghost {
+  display: inline-block;
+  padding: 12px 26px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 40px;
+  transition: background 0.3s, color 0.3s;
+}
+.btn-ghost:hover,
+.btn-ghost:focus-visible { background: var(--accent); color: #fff; outline: none; }
+
+/* ---------- 8. Galería asimétrica ---------- */
+/* Grilla de 2 columnas con alturas distintas para un efecto editorial */
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 120px;
+  gap: 12px;
+}
+.g-item { margin: 0; overflow: hidden; border-radius: var(--radius); box-shadow: var(--shadow-soft); }
+.g-1 { grid-row: span 3; }  /* alta */
+.g-2 { grid-row: span 2; }
+.g-3 { grid-row: span 2; }
+.g-4 { grid-row: span 3; }  /* alta */
+
+.g-item img,
+.ph { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Placeholder: se ve prolijo hasta que pongas fotos reales */
+.ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--accent);
+  background: linear-gradient(135deg, #efe5d8, #e6d3c6);
+}
+.g-2 .ph { background: linear-gradient(135deg, #f1e4dc, #e8d2c8); }
+.g-3 .ph { background: linear-gradient(135deg, #ece3d3, #ddd0bb); }
+
+/* ---------- 9. Formulario RSVP ---------- */
+.formulario {
+  background: var(--card);
+  border: 1px solid rgba(176, 137, 104, 0.15);
+  border-radius: var(--radius);
+  padding: 30px 20px; /* Un poco menos de espacio lateral en móvil */
+  box-shadow: var(--shadow-soft);
+  text-align: left;
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  box-sizing: border-box; /* Clave para que no desborde */
+}
+.campo { 
+  margin-bottom: 26px; 
+  border: none; 
+  padding: 0; 
+}
+
+.campo label,
+.campo legend {
+  display: block;
+  font-size: 10.5px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.campo input[type="text"],
+.campo input[type="number"],
+.campo select,
+.campo textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  padding: 10px 2px;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.3s;
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder { 
+  color: #fbf8f3; 
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+
+/* Opciones "Voy / No voy" tipo botones elegantes */
+.campo--opciones {
+  display: flex;
+  gap: 12px;
+}
+
+.campo--opciones legend { 
+  width: 100%; 
+}
+
+.opcion {
+  flex: 1;
+  position: relative;
+  cursor: pointer;
+}
+
+.opcion input {
+  position: absolute;
+  opacity: 0;
+}
+
+.opcion span {
+  display: block;
+  padding: 14px 12px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 40px;
+  transition: all 0.3s ease;
+}
+
+.opcion input:checked + span {
+  background: var(--accent);
+  color: #fbf8f3;
+}
+
+/* Campos ocultos iniciales */
+#campos-asistencia {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Botón enviar */
+.btn--ancho {
+  position: relative;
+  width: 100%;
+  padding: 16px;
+  margin-top: 6px;
+  border: 1px solid var(--accent); /* Borde color tierra */
+  border-radius: 40px;
+  background: transparent; /* Arranca transparente */
+  color: var(--accent); /* Letra color tierra */
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: none; /* Sin sombra para que quede igual a los otros */
+  transition: background 0.3s, color 0.3s, transform 0.25s; /* Transición suave */
+}
+
+.btn--ancho:hover {
+  transform: translateY(-1px);
+  background: var(--accent); /* Se rellena de color al pasar el mouse */
+  color: #fff; /* La letra se pone blanca */
+}
+
+.aviso {
+  min-height: 1.5em;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+/* ---------- 10. Footer ---------- */
+.footer { text-align: center; padding: 40px 24px 70px; }
+.footer-names { font-family: var(--font-title); font-size: 30px; font-style: italic; color: var(--accent); }
+.footer-note { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-soft); margin-top: 8px; }
+
+/* ---------- 11. Pantallas más grandes ---------- */
+@media (min-width: 768px) {
+  body { font-size: 16px; }
+  .section { padding: 120px 24px; }
+  .section-title { font-size: 46px; }
+  #cronograma { max-width: 860px; }
+  .cards { grid-template-columns: 1fr 1fr; }
+  .gallery { grid-auto-rows: 150px; }
+}
+
+/* ---------- 12. Accesibilidad: menos movimiento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .scroll-hint span { animation: none; opacity: 1; }
+}
+/* ============ BOX DE PRESENTACIÓN ============ */
+.presentation-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  background: rgba(247, 242, 234, 0.95); 
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 2s ease, visibility 2s ease;
+}
+
+.presentation-content {
+  text-align: center;
+  padding: 40px 20px; /* Padding más chico para que respire en el celu */
+  border: 1px solid rgba(176, 137, 104, 0.25); 
+  border-radius: var(--radius);
+  background: var(--card); 
+  box-shadow: var(--shadow-soft); 
+  width: 90%; /* Porcentaje en vez de píxeles fijos */
+  max-width: 500px; /* Tope máximo */
+  transform: translateY(0);
+  transition: transform 1s ease;
+  box-sizing: border-box; /* Clave para que no desborde */
+  margin: 0 auto; /* Asegura el centrado */
+}
+
+/* Magia: Esto hace que en la compu sí se vea GIGANTE como querías */
+@media (min-width: 768px) {
+  .presentation-content {
+    padding: 80px 60px;
+    max-width: 650px;
+  }
+}
+.presentation-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.presentation-names {
+  font-family: var(--font-title);
+  font-size: 42px;
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 32px;
+}
+
+.presentation-names .amp {
+  font-style: italic;
+  font-size: 0.7em;
+  color: var(--accent-soft);
+}
+
+.btn-open {
+  width: 100%;
+  padding: 18px 24px; 
+  font-family: var(--font-body);
+  font-size: 14px; 
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 40px; 
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-open:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: scale(1.02); 
+}
+
+/* Clases que agrega JS para ocultar la caja */
+.presentation-box.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.presentation-box.is-hidden .presentation-content {
+  transform: translateY(-20px);
+}
+
+/* Evita que se pueda scrollear la página mientras la caja está activa */
+body.no-scroll {
+  overflow: hidden;
+}

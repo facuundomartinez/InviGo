@@ -1,0 +1,393 @@
+/* ==========================================================
+   INVITACIÓN DE 15 · "Nivel Base"
+   Estilo: juvenil y sofisticado · fondo oscuro con acentos pastel
+   Mobile-first · single-page · CSS puro (+ JS mínimo opcional)
+   ========================================================== */
+
+/* ---------- 1. Variables ---------- */
+:root {
+  /* Fondo oscuro profundo (violeta casi negro) */
+  --bg: #0e0a1c;
+  --card: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.12);
+
+  /* Texto */
+  --text: #f3eefc;
+  --text-soft: rgba(243, 238, 252, 0.68);
+
+  /* Acentos pastel: lila, rosa y durazno */
+  --lilac: #c8b6ff;
+  --pink: #ffb8d9;
+  --peach: #ffd6b0;
+  --gradient: linear-gradient(120deg, var(--lilac), var(--pink) 55%, var(--peach));
+
+  --font-title: "Unbounded", system-ui, sans-serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+
+  --radius: 24px;
+  --max-w: 460px;
+}
+
+/* ---------- 2. Reset y base ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+address { font-style: normal; }
+a { color: inherit; }
+
+/* Contenido por encima del fondo decorativo */
+.page, .footer { position: relative; z-index: 1; }
+
+/* ---------- 3. Fondo decorativo (orbes difuminados) ---------- */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.45;
+  animation: float 18s ease-in-out infinite alternate;
+}
+.orb-1 { width: 280px; height: 280px; background: #7c5cff; top: -80px; left: -90px; }
+.orb-2 { width: 240px; height: 240px; background: #ff7eb6; top: 38%; right: -110px; animation-delay: -6s; }
+.orb-3 { width: 260px; height: 260px; background: #ffb27a; bottom: -100px; left: 10%; opacity: 0.3; animation-delay: -12s; }
+
+@keyframes float {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(30px, -40px, 0) scale(1.12); }
+}
+
+/* ---------- 4. Layout ---------- */
+.page {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+.section {
+  padding: 56px 0;
+  text-align: center;
+}
+
+/* Etiqueta pequeña sobre cada título */
+.eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--lilac);
+  margin-bottom: 24px;
+}
+
+/* ---------- 5. Hero ---------- */
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 70px 0 90px;
+  position: relative;
+}
+
+/* Animación de entrada en CSS puro (no depende de JS) */
+.hero > * {
+  animation: rise 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.hero-pre  { animation-delay: 0.1s; }
+.hero-name { animation-delay: 0.25s; }
+.hero-title{ animation-delay: 0.4s; }
+.hero-date { animation-delay: 0.6s; }
+.scroll-cue{ animation-delay: 0.9s; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-pre {
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.hero-name {
+  font-family: var(--font-title);
+  font-weight: 300;
+  font-size: 22px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-top: 18px;
+}
+
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.85;
+  margin: 26px 0 30px;
+}
+.hero-mis {
+  font-family: var(--font-title);
+  font-weight: 300;
+  font-size: 30px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+/* El "15" gigante con degradé pastel */
+.hero-15 {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 150px;
+  font-size: clamp(130px, 44vw, 190px);
+  letter-spacing: -0.04em;
+  color: var(--pink); /* respaldo si el navegador no soporta background-clip */
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 10px 40px rgba(200, 182, 255, 0.35));
+}
+
+.hero-date {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 28px;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  background: var(--card);
+  font-size: 12px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+.hero-date strong {
+  font-family: var(--font-title);
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.18em;
+  color: var(--text);
+}
+
+/* Indicador de scroll */
+.scroll-cue {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  margin-left: -11px;
+  width: 22px;
+  height: 36px;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+}
+.scroll-cue span {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  width: 3px;
+  height: 7px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: var(--pink);
+  animation: cue 2.2s ease-in-out infinite;
+}
+@keyframes cue {
+  0%   { opacity: 0; transform: translateY(0); }
+  40%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(14px); }
+}
+
+/* ---------- 6. Tarjetas (efecto vidrio) ---------- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 40px 26px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.6);
+}
+
+/* Cuándo y dónde */
+.time {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 1;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: var(--pink);
+  -webkit-text-fill-color: transparent;
+}
+.time small {
+  font-size: 18px;
+  font-weight: 300;
+  margin-left: 6px;
+  -webkit-text-fill-color: var(--text-soft);
+}
+.line {
+  width: 40px;
+  height: 2px;
+  background: var(--gradient);
+  margin: 26px auto;
+  border-radius: 2px;
+}
+.venue {
+  font-family: var(--font-title);
+  font-weight: 500;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.address {
+  color: var(--text-soft);
+  margin-bottom: 30px;
+}
+
+/* Dress code */
+.dress-word {
+  font-family: var(--font-title);
+  font-weight: 700;
+  /* Acá está la magia: tamaño elástico (mínimo 26px, ideal 8vw, máximo 38px) */
+  font-size: clamp(26px, 8vw, 38px);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: var(--pink);
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 16px;
+}
+.dress-note {
+  color: var(--text-soft);
+  font-size: 15px;
+}
+
+/* ---------- 7. Botones ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 700;
+  border-radius: 999px;
+  transition: transform 0.25s, box-shadow 0.25s, background 0.25s, color 0.25s;
+}
+.btn svg { width: 18px; height: 18px; flex: none; }
+
+/* Botón simple (Maps): contorno */
+.btn-outline {
+  padding: 14px 28px;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+  border: 1px solid var(--lilac);
+}
+.btn-outline svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.btn-outline:hover,
+.btn-outline:focus-visible { background: var(--lilac); color: var(--bg); outline: none; }
+
+/* Botón grande de WhatsApp */
+.btn-whatsapp {
+  width: 100%;
+  padding: 20px 24px;
+  font-size: 17px;
+  color: #fff;
+  background: linear-gradient(135deg, #25d366, #12a150);
+  box-shadow: 0 16px 36px -10px rgba(37, 211, 102, 0.55);
+  animation: pulse 2.6s ease-in-out infinite;
+}
+.btn-whatsapp svg { width: 26px; height: 26px; fill: currentColor; }
+.btn-whatsapp:hover,
+.btn-whatsapp:focus-visible { transform: translateY(-2px); outline: none; }
+.btn-whatsapp:active { transform: scale(0.98); }
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 16px 36px -10px rgba(37, 211, 102, 0.55), 0 0 0 0 rgba(37, 211, 102, 0.35); }
+  50%      { box-shadow: 0 16px 36px -10px rgba(37, 211, 102, 0.55), 0 0 0 14px rgba(37, 211, 102, 0); }
+}
+
+/* ---------- 8. RSVP ---------- */
+.rsvp-title {
+  font-family: var(--font-title);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.rsvp-text {
+  color: var(--text-soft);
+  margin-bottom: 32px;
+}
+
+/* ---------- 9. Footer ---------- */
+.footer {
+  text-align: center;
+  padding: 30px 22px 60px;
+  font-family: var(--font-title);
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+.footer-sub {
+  margin-top: 8px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+}
+
+/* ---------- 10. Aparición al hacer scroll ----------
+   El estado oculto SOLO existe si el JS agregó la clase "js" al <html>.
+   Sin JS (o sin soporte), todo se ve normal. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- 11. Pantallas grandes ---------- */
+@media (min-width: 768px) {
+  .hero-name { font-size: 26px; }
+  .section { padding: 72px 0; }
+}
+
+/* ---------- 12. Accesibilidad: menos movimiento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .orb, .btn-whatsapp, .scroll-cue span { animation: none; }
+  .hero > * { animation: none; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+}

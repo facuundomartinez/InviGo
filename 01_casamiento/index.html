@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Sofía & Mateo · Nuestro casamiento</title>
+  <meta name="description" content="Te invitamos a celebrar nuestro casamiento." />
+  <meta name="theme-color" content="#f7f2ea" />
+
+  <!-- Tipografías: Cormorant Garamond (títulos) + Montserrat (textos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- AOS (Animate On Scroll). Es opcional: si no carga, la página se ve igual -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="/01_casamiento/styles.css" />
+</head>
+<body class="no-scroll">
+  <!-- ============ BOX DE PRESENTACIÓN (BIENVENIDA) ============ -->
+  <div id="presentation-box" class="presentation-box">
+    <div class="presentation-content">
+      <p class="presentation-eyebrow">Bienvenidos a la boda de</p>
+      <h2 class="presentation-names">Sofía <span class="amp">&</span> Mateo</h2>
+      <button id="btn-open-invite" class="btn btn-open">Abrir Invitación</button>
+    </div>
+  </div>
+
+  <!-- Canvas de pétalos: fijo al fondo, no intercepta toques -->
+  <canvas id="petals-canvas" aria-hidden="true"></canvas>
+
+  <!-- Botón flotante de música (discreto) -->
+  <button id="music-toggle" class="music-toggle" type="button" aria-label="Reproducir música" aria-pressed="false">
+    <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" /></svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" /></svg>
+  </button>
+  <!-- Reemplazá la ruta por tu archivo de música -->
+  <audio id="bg-music" loop preload="none">
+    <source src="assets/musica.mp3" type="audio/mpeg" />
+  </audio>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="inicio">
+      <p class="eyebrow" data-reveal="fade-up">Nos casamos</p>
+      <h1 class="names" data-reveal="fade-up" data-delay="150">
+        Sofía <span class="amp">&</span> Mateo
+      </h1>
+      <div class="divider" data-reveal="fade-up" data-delay="300" aria-hidden="true"></div>
+      <p class="date" data-reveal="fade-up" data-delay="400">20 · 03 · 2027</p>
+      <p class="quote" data-reveal="fade-up" data-delay="550">
+        “Elegirte fue la decisión más simple<br />y la más hermosa de mi vida.”
+      </p>
+      <a href="#cronograma" class="scroll-hint" aria-label="Seguir bajando"><span></span></a>
+    </section>
+
+    <!-- ============ CRONOGRAMA Y UBICACIÓN ============ -->
+    <section class="section" id="cronograma">
+      <h2 class="section-title" data-reveal="fade-up">Cuándo & dónde</h2>
+      <p class="section-sub" data-reveal="fade-up" data-delay="100">Sábado 20 de marzo de 2027</p>
+
+      <div class="cards">
+        <!-- Ceremonia -->
+        <article class="card" data-reveal="fade-up">
+          <span class="card-time">17:00 hs</span>
+          <h3 class="card-title">Ceremonia</h3>
+          <p class="card-place">Iglesia Nuestra Señora del Carmen</p>
+          <p class="card-address">Av. San Martín 1234, Mendoza</p>
+          <!-- Reemplazá el href por el link real de Google Maps -->
+          <a class="btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Iglesia+Nuestra+Se%C3%B1ora+del+Carmen+Mendoza" target="_blank" rel="noopener">
+            Ver en Google Maps
+          </a>
+        </article>
+
+        <!-- Fiesta -->
+        <article class="card" data-reveal="fade-up" data-delay="150">
+          <span class="card-time">20:30 hs</span>
+          <h3 class="card-title">Fiesta</h3>
+          <p class="card-place">Finca Los Álamos</p>
+          <p class="card-address">Ruta 40 km 3200, Luján de Cuyo</p>
+          <a class="btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Finca+Los+%C3%81lamos+Luj%C3%A1n+de+Cuyo" target="_blank" rel="noopener">
+            Ver en Google Maps
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ GALERÍA ============ -->
+    <section class="section" id="galeria">
+      <h2 class="section-title" data-reveal="fade-up">Nuestra historia</h2>
+      <p class="section-sub" data-reveal="fade-up" data-delay="100">Algunos momentos que nos trajeron hasta acá</p>
+
+      <!-- Grilla asimétrica. Reemplazá cada <div class="ph"> por <img src="..." alt="..."> -->
+      <div class="gallery">
+        <figure class="g-item g-1" data-reveal="zoom-in">
+          <div class="ph">Foto 1</div>
+        </figure>
+        <figure class="g-item g-2" data-reveal="zoom-in" data-delay="100">
+          <div class="ph">Foto 2</div>
+        </figure>
+        <figure class="g-item g-3" data-reveal="zoom-in" data-delay="150">
+          <div class="ph">Foto 3</div>
+        </figure>
+        <figure class="g-item g-4" data-reveal="zoom-in" data-delay="200">
+          <div class="ph">Foto 4</div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ RSVP ============ -->
+   <section class="section reveal" id="confirmar">
+      <h2 class="section-title">¿Venís?</h2>
+      <p class="section-sub">Confirmanos tu asistencia antes del 20 de febrero de 2027.</p>
+
+      <form class="formulario" id="form-rsvp">
+
+        <div class="campo">
+          <label for="nombre">Nombre y apellido</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ej: Lucía Pérez" required>
+        </div>
+
+        <fieldset class="campo campo--opciones">
+          <legend>¿Podés asistir?</legend>
+          <label class="opcion">
+            <input type="radio" name="asistencia" value="si" required>
+            <span>¡Sí, voy!</span>
+          </label>
+          <label class="opcion">
+            <input type="radio" name="asistencia" value="no">
+            <span>No puedo ir</span>
+          </label>
+        </fieldset>
+
+        <div id="campos-asistencia">
+          <div class="campo">
+            <label for="cantidad">Cantidad de personas (contándote a vos)</label>
+            <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="1" required>
+          </div>
+          <div class="campo">
+            <label for="menu">Restricciones alimentarias</label>
+            <select id="menu" name="menu">
+              <option value="Ninguna">Ninguna</option>
+              <option value="Vegetariano">Vegetariano/a</option>
+              <option value="Vegano">Vegano/a</option>
+              <option value="Celíaco (sin TACC)">Celíaco/a (sin TACC)</option>
+              <option value="Otra (la aclaro en el mensaje)">Otra (la aclaro en el mensaje)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="mensaje">Mensaje para los novios (opcional)</label>
+          <textarea id="mensaje" name="mensaje" rows="3" placeholder="¡Qué alegría! Nos vemos ahí..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn--ancho">Enviar confirmación</button>
+
+        <p class="aviso" id="aviso-rsvp" aria-live="polite"></p>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p class="footer-names">Sofía & Mateo</p>
+    <p class="footer-note">Gracias por ser parte de este día</p>
+  </footer>
+
+  <!-- Scripts: AOS es opcional, script.js funciona aunque AOS no cargue -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="/01_casamiento/script.js"></script>
+</body>
+</html>
