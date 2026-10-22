@@ -583,3 +583,30 @@ También ajustamos el margen superior para que queden escalonadas visualmente. *
   width: auto;
   object-fit: contain;
 }
+/* ---------- 14. Lista de características (Portfolio) ---------- */
+.features-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 10px;
+  text-align: left; /* Alineamos a la izquierda para que sea fácil de leer */
+}
+
+.features-list li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+/* Creamos un tilde/punto personalizado con el color de tu marca */
+.features-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-size: 18px;
+  line-height: 1.2;
+}
