@@ -533,3 +533,42 @@ main, footer { position: relative; z-index: 1; }
 body.no-scroll {
   overflow: hidden;
 }
+/* ---------- 13. Cuenta Regresiva (Responsive) ---------- */
+.timeboxes { 
+  display: flex; 
+  justify-content: center; 
+  gap: 10px; /* Espacio más chico entre cajas en celu */
+  margin-top: 32px; 
+}
+.timebox { text-align: center; }
+
+/* Sobrescribimos el padding gigante de la clase .card solo acá */
+.timebox .card {
+  padding: 16px 8px; /* Menos relleno para que entren los 4 */
+  min-width: 70px; 
+}
+
+.timebox .num { 
+  font-family: var(--font-title); 
+  font-size: 32px; /* Letra más chica en celu */
+  color: var(--accent); 
+  line-height: 1; 
+  font-weight: 300; 
+}
+
+.timebox .lbl { 
+  font-size: 9px; 
+  letter-spacing: 0.15em; 
+  text-transform: uppercase; 
+  color: var(--ink-soft); 
+  display: block; 
+  margin-top: 10px; 
+}
+
+/* Ajustes automáticos para pantallas de computadora (más de 768px) */
+@media (min-width: 768px) {
+  .timeboxes { gap: 24px; }
+  .timebox .card { padding: 24px 20px; min-width: 90px; }
+  .timebox .num { font-size: 46px; }
+  .timebox .lbl { font-size: 11px; letter-spacing: 0.25em; }
+}

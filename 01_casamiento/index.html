@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
   <!-- Estilos propios -->
-  <link rel="stylesheet" href="/01_casamiento/styles.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="no-scroll">
   <!-- ============ BOX DE PRESENTACIÓN (BIENVENIDA) ============ -->
@@ -55,6 +55,28 @@
         “Elegirte fue la decisión más simple<br />y la más hermosa de mi vida.”
       </p>
       <a href="#cronograma" class="scroll-hint" aria-label="Seguir bajando"><span></span></a>
+    </section>
+    <!-- ============ CUENTA REGRESIVA ============ -->
+    <section class="section" id="countdown" data-reveal="fade-up">
+      <h2 class="section-title" id="countdownTitle">Faltan</h2>
+      <div class="timeboxes" id="timeboxes">
+        <div class="timebox">
+          <div class="num card" id="cd-days">00</div>
+          <span class="lbl">Días</span>
+        </div>
+        <div class="timebox">
+          <div class="num card" id="cd-hours">00</div>
+          <span class="lbl">Horas</span>
+        </div>
+        <div class="timebox">
+          <div class="num card" id="cd-min">00</div>
+          <span class="lbl">Min</span>
+        </div>
+        <div class="timebox">
+          <div class="num card" id="cd-sec">00</div>
+          <span class="lbl">Seg</span>
+        </div>
+      </div>
     </section>
 
     <!-- ============ CRONOGRAMA Y UBICACIÓN ============ -->
@@ -171,6 +193,6 @@
 
   <!-- Scripts: AOS es opcional, script.js funciona aunque AOS no cargue -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script src="/01_casamiento/script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

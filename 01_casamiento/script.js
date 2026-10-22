@@ -276,7 +276,6 @@ var APPS_SCRIPT_URL = "";
       setStatus("Por favor completá tu nombre y apellido y tu asistencia.", "error");
       return;
     }
-
     // Datos que recibirá Apps Script (las claves llegan en e.parameter)
     var data = new URLSearchParams();
     data.append("nombre_apellido", nombre.value.trim());
@@ -337,3 +336,35 @@ var APPS_SCRIPT_URL = "";
       - Quién tiene acceso: Cualquier usuario
    4) Copiá la URL y pegala en APPS_SCRIPT_URL, arriba.
    ========================================================== */
+/* ==========================================================
+   5. CUENTA REGRESIVA
+   ========================================================== */
+(function countdown() {
+  // ACÁ CAMBIÁS LA FECHA DEL EVENTO
+  // Formato: Mes en inglés, Día, Año Hora:Minutos:Segundos
+  const fechaEvento = new Date("january 1, 2027 17:00:00").getTime();
+
+  const x = setInterval(function() {
+    const ahora = new Date().getTime();
+    const distancia = fechaEvento - ahora;
+
+    const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+    const elDias = document.getElementById("cd-days");
+    if (!elDias) return;
+
+    elDias.innerHTML = dias < 10 ? "0" + dias : dias;
+    document.getElementById("cd-hours").innerHTML = horas < 10 ? "0" + horas : horas;
+    document.getElementById("cd-min").innerHTML = minutos < 10 ? "0" + minutos : minutos;
+    document.getElementById("cd-sec").innerHTML = segundos < 10 ? "0" + segundos : segundos;
+
+    if (distancia < 0) {
+      clearInterval(x);
+      document.getElementById("countdownTitle").innerHTML = "¡Llegó el gran día!";
+      document.getElementById("timeboxes").style.display = "none";
+    }
+  }, 1000);
+})();
