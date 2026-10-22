@@ -635,3 +635,30 @@ También ajustamos el margen superior para que queden escalonadas visualmente. *
   font-size: 15px;
   font-weight: bold;
 }
+/* 1. Contenedor de la ventanita */
+.demo_image-container {
+  height: 340px; /* Un poco más alto para lucir la animación de inicio */
+  overflow: hidden;
+  border-bottom: 1px solid rgba(176, 137, 104, 0.15);
+  position: relative;
+  cursor: pointer; /* Transforma el cursor en la "manito" indicando que se puede tocar */
+}
+
+/* 2. El iframe que carga la tarjeta viva */
+.demo_iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  pointer-events: none; /* LA CLAVE: Desactiva los clicks adentro del iframe */
+  background: var(--bg); /* Fondo por si tarda un segundo en cargar */
+}
+
+/* 3. Efecto interactivo para toda la tarjeta (Opcional pero muy profesional) */
+.card.demo {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card.demo:hover {
+  transform: translateY(-5px); /* Se levanta un poquito al pasar el mouse */
+  box-shadow: 0 15px 35px -10px rgba(120, 90, 60, 0.25);
+}
