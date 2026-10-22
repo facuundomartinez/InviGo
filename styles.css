@@ -645,12 +645,15 @@ También ajustamos el margen superior para que queden escalonadas visualmente. *
 }
 
 /* 2. El iframe que carga la tarjeta viva */
+/* El iframe se renderiza al 200% y se achica a la mitad para mantener proporciones de celular */
 .demo_iframe {
-  width: 100%;
-  height: 100%;
+  width: 200%;
+  height: 200%;
+  transform: scale(0.5);
+  transform-origin: top left;
   border: none;
-  pointer-events: none; /* LA CLAVE: Desactiva los clicks adentro del iframe */
-  background: var(--bg); /* Fondo por si tarda un segundo en cargar */
+  pointer-events: none;
+  background: var(--bg);
 }
 
 /* 3. Efecto interactivo para toda la tarjeta (Opcional pero muy profesional) */
