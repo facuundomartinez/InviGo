@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save the Date · Sofía & Matías</title>
+  <meta name="description" content="Guardá la fecha: Sofía y Matías se casan. Edición Premium by InviGo.">
+  <meta name="theme-color" content="#241a1c">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Montserrat:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<!-- WEB DE EXPECTATIVA: se envía primero, antes de la invitación formal -->
+<body class="std-body">
+
+  <canvas class="petalos" id="petalos" aria-hidden="true"></canvas>
+
+  <main class="std">
+
+    <!-- 1. Monograma dentro de un aro que se dibuja solo -->
+    <div class="std__marco">
+      <svg class="std__aro" viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="100" cy="100" r="96"/>
+        <circle cx="100" cy="100" r="88"/>
+      </svg>
+      <span class="std__mono" data-fill="monograma">S & M</span>
+    </div>
+
+    <!-- 2. Título y nombres -->
+    <p class="std__titulo">Save the date</p>
+    <h1 class="std__nombres">
+      <span data-fill="novia">Sofía</span><em>&</em><span data-fill="novio">Matías</span>
+    </h1>
+
+    <!-- 3. Fecha y ciudad -->
+    <div>
+      <p class="std__fecha" data-fill="fechaLarga">Sábado 20 de marzo de 2027</p>
+      <p class="std__ciudad" data-fill="ciudad">Mendoza, Argentina</p>
+    </div>
+
+    <!-- 4. Cuenta regresiva -->
+    <div class="contador" id="contador" role="timer" aria-live="off">
+      <div class="contador__caja"><strong id="cDias">00</strong><span>Días</span></div>
+      <div class="contador__caja"><strong id="cHoras">00</strong><span>Horas</span></div>
+      <div class="contador__caja"><strong id="cMin">00</strong><span>Min</span></div>
+      <div class="contador__caja"><strong id="cSeg">00</strong><span>Seg</span></div>
+    </div>
+    <p class="contador__mensaje" id="cMensaje" hidden>¡Hoy es el gran día!</p>
+
+    <!-- 5. Texto -->
+    <p class="std__texto" data-fill="textoSaveTheDate">Reservá esta fecha en tu agenda.</p>
+
+    <!-- 6. Acciones -->
+    <div class="acciones">
+      <a class="boton boton--oro" id="btnCalendario" href="#" target="_blank" rel="noopener">Agendar la fecha</a>
+      <button class="boton boton--ghost-claro" id="btnIcs" type="button">Apple / Outlook</button>
+    </div>
+    <div class="acciones">
+      <button class="boton boton--ghost-claro" id="btnCompartir" type="button">Compartir</button>
+      <a class="boton boton--ghost-claro" id="btnInvitacion" href="index.html" hidden>Ver invitación</a>
+    </div>
+
+    <p class="std__firma">Hecho con ♥ por <strong>InviGo</strong> · Edición Premium</p>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="config.js"></script>
+  <script src="comun.js"></script>
+  <script src="std.js"></script>
+</body>
+</html>

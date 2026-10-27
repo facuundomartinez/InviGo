@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sofía & Matías · Nos casamos</title>
+  <meta name="description" content="Te invitamos a celebrar nuestro casamiento. Edición Premium by InviGo.">
+  <meta name="theme-color" content="#2a1a1d">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bloqueado">
+
+  <!-- Canción de fondo (se configura en config.js) -->
+  <audio id="musica" loop preload="none"></audio>
+
+  <!-- Barra dorada que avanza mientras se hace scroll -->
+  <div class="progreso-scroll" id="progScroll" aria-hidden="true"></div>
+
+  <!-- Pétalos que caen sobre toda la tarjeta -->
+  <canvas class="petalos" id="petalos" aria-hidden="true"></canvas>
+
+  <!-- ============================================================
+       INTRO · SOBRE ANIMADO
+       Al tocar el sello: se abre la tapa, sube la carta y se revela la tarjeta
+       ============================================================ -->
+  <section class="intro" id="intro">
+    <div class="intro__escena">
+      <p class="intro__para" id="introPara">Una invitación muy especial</p>
+
+      <div class="sobre" id="sobre">
+        <div class="sobre__carta">
+          <span class="sobre__mono" data-fill="monograma">S & M</span>
+          <small>Nos casamos</small>
+        </div>
+        <div class="sobre__frente"></div>
+        <div class="sobre__tapa"></div>
+        <button class="sobre__sello" id="btnAbrir" type="button" aria-label="Abrir invitación">
+          <span data-fill="monograma">S & M</span>
+        </button>
+      </div>
+
+      <p class="intro__ayuda">Tocá el sello para abrir&nbsp;&nbsp;♪</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       REPRODUCTOR DE MÚSICA (barra inferior)
+       ============================================================ -->
+  <div class="player" id="player" hidden>
+    <div class="player__barra" id="pBarra" role="slider" aria-label="Progreso de la canción"
+         aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+      <i id="pRelleno"></i>
+    </div>
+
+    <button class="player__play" id="pPlay" type="button" aria-label="Reproducir o pausar">
+      <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="ico-pausa" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+    </button>
+
+    <div class="player__info">
+      <strong id="pTitulo">Nuestra canción</strong>
+      <span id="pArtista"></span>
+    </div>
+
+    <span class="player__tiempo" id="pTiempo">0:00</span>
+
+    <button class="player__mute" id="pMute" type="button" aria-label="Silenciar">
+      <svg class="ico-sonido" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg>
+      <svg class="ico-mudo" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm12 .7 1.4-1.4L19 9.9l1.6-1.6L22 9.7 20.4 11.3 22 12.9l-1.4 1.4L19 12.7l-1.6 1.6-1.4-1.4 1.6-1.6z"/></svg>
+    </button>
+  </div>
+
+  <main id="contenido">
+
+    <!-- ==========================================================
+         HERO · foto con zoom suave + parallax
+         ========================================================== -->
+    <header class="hero" id="inicio">
+      <div class="hero__fondo" id="heroFondo"></div>
+      <div class="hero__velo"></div>
+
+      <div class="hero__contenido">
+        <p class="hero__saludo" id="saludo" hidden></p>
+        <p class="eyebrow eyebrow--claro">Nos casamos</p>
+        <h2 class="hero__nombres">
+          <span data-fill="novia">Sofía</span>
+          <em>&</em>
+          <span data-fill="novio">Matías</span>
+        </h2>
+        <div class="divisor divisor--claro" aria-hidden="true"><span></span><b>◆</b><span></span></div>
+        <p class="hero__fecha" data-fill="fechaLarga">Sábado 20 de marzo de 2027</p>
+        <p class="hero__ciudad" data-fill="ciudad">Mendoza, Argentina</p>
+      </div>
+
+      <a href="#cuenta" class="hero__scroll" aria-label="Bajar"><span></span></a>
+    </header>
+
+    <!-- ==========================================================
+         CUENTA REGRESIVA
+         ========================================================== -->
+    <section class="seccion seccion--oscura" id="cuenta">
+      <div class="contenedor">
+        <p class="eyebrow eyebrow--claro reveal">Falta muy poco</p>
+        <h2 class="titulo titulo--claro reveal">Cuenta regresiva</h2>
+
+        <div class="contador reveal" id="contador" role="timer" aria-live="off">
+          <div class="contador__caja"><strong id="cDias">00</strong><span>Días</span></div>
+          <div class="contador__caja"><strong id="cHoras">00</strong><span>Horas</span></div>
+          <div class="contador__caja"><strong id="cMin">00</strong><span>Min</span></div>
+          <div class="contador__caja"><strong id="cSeg">00</strong><span>Seg</span></div>
+        </div>
+        <p class="contador__mensaje" id="cMensaje" hidden>¡Hoy es el gran día!</p>
+
+        <div class="acciones reveal">
+          <a class="boton boton--ghost-claro" id="btnCalendario" href="#" target="_blank" rel="noopener">Google Calendar</a>
+          <button class="boton boton--ghost-claro" id="btnIcs" type="button">Apple / Outlook (.ics)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         CARRUSEL FOTOGRÁFICO
+         Las fotos se cargan desde config.js
+         ========================================================== -->
+    <section class="seccion seccion--crema" id="historia">
+      <div class="contenedor contenedor--ancho">
+        <p class="eyebrow reveal">Nuestra historia</p>
+        <h2 class="titulo reveal">Momentos que nos trajeron hasta acá</h2>
+
+        <div class="carrusel reveal" id="carrusel" aria-roledescription="carrusel" aria-label="Fotos de la pareja">
+          <div class="carrusel__vista">
+            <div class="carrusel__pista" id="pista"></div>
+          </div>
+          <button class="carrusel__flecha carrusel__flecha--prev" id="prev" type="button" aria-label="Foto anterior">‹</button>
+          <button class="carrusel__flecha carrusel__flecha--next" id="next" type="button" aria-label="Foto siguiente">›</button>
+          <div class="carrusel__progreso"><i id="carProg"></i></div>
+        </div>
+        <p class="carrusel__pie" id="carPie" aria-live="polite"></p>
+        <div class="carrusel__dots" id="dots"></div>
+      </div>
+    </section>
+
+    <!-- Visor en pantalla completa (se abre al tocar una foto) -->
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lightbox__cerrar" id="lbCerrar" type="button" aria-label="Cerrar">×</button>
+      <img id="lbImg" alt="">
+      <p id="lbPie"></p>
+    </div>
+
+    <!-- ==========================================================
+         BANDA DE FOTO CON FRASE (efecto parallax)
+         ========================================================== -->
+    <section class="banda" id="banda" aria-label="Frase de los novios">
+      <div class="banda__fondo" id="bandaFondo"></div>
+      <div class="banda__velo"></div>
+      <blockquote class="banda__frase reveal">
+        <span class="banda__comillas" aria-hidden="true">“</span>
+        <p id="frase"></p>
+        <footer><span data-fill="novia">Sofía</span> & <span data-fill="novio">Matías</span></footer>
+      </blockquote>
+    </section>
+
+    <!-- ==========================================================
+         CRONOGRAMA · EL GRAN DÍA (línea de tiempo animada)
+         ========================================================== -->
+    <section class="seccion" id="dia">
+      <div class="contenedor contenedor--medio">
+        <p class="eyebrow reveal">El gran día</p>
+        <h2 class="titulo reveal">Cronograma</h2>
+        <ol class="linea" id="linea"></ol>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         LUGAR · MAPA SATELITAL
+         ========================================================== -->
+    <section class="seccion seccion--crema" id="lugar">
+      <div class="contenedor">
+        <p class="eyebrow reveal">Dónde y cuándo</p>
+        <h2 class="titulo reveal">Ceremonia y fiesta</h2>
+
+        <div class="tabs reveal" role="tablist">
+          <button class="tabs__btn activo" role="tab" data-lugar="ceremonia" aria-selected="true">Ceremonia</button>
+          <button class="tabs__btn" role="tab" data-lugar="fiesta" aria-selected="false">Fiesta</button>
+        </div>
+
+        <div class="lugar reveal">
+          <div class="lugar__info">
+            <p class="lugar__hora" id="lugarHora">17:00 hs</p>
+            <h3 class="lugar__nombre" id="lugarNombre">Iglesia</h3>
+            <p class="lugar__dir" id="lugarDir">Dirección</p>
+            <div class="acciones acciones--izq">
+              <a class="boton boton--ghost" id="lugarLink" href="#" target="_blank" rel="noopener">Cómo llegar</a>
+              <button class="boton boton--ghost" id="btnVista" type="button">Ver mapa de calles</button>
+            </div>
+          </div>
+
+          <div class="mapa">
+            <iframe id="mapaFrame" title="Mapa satelital del lugar" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+            <span class="mapa__etiqueta" id="mapaEtiqueta">Vista satelital</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         DRESS CODE · GUÍA VISUAL
+         ========================================================== -->
+    <section class="seccion" id="dresscode">
+      <div class="contenedor">
+        <p class="eyebrow reveal">Código de vestimenta</p>
+        <h2 class="titulo reveal">Formal elegante</h2>
+        <p class="texto-centro reveal">Queremos verte brillar. Te dejamos una guía para que elijas con tranquilidad.</p>
+
+        <h3 class="subtitulo reveal">Paleta sugerida</h3>
+        <ul class="paleta reveal">
+          <li><i style="--c:#4b5238"></i><span>Verde oliva</span></li>
+          <li><i style="--c:#6e2a35"></i><span>Borravino</span></li>
+          <li><i style="--c:#1e2a44"></i><span>Azul noche</span></li>
+          <li><i style="--c:#b8975a"></i><span>Dorado</span></li>
+          <li><i style="--c:#d9c7b0"></i><span>Arena</span></li>
+        </ul>
+        <p class="paleta__evitar reveal"><i></i> Por favor, evitá el blanco, marfil y crudo: son colores reservados para la novia.</p>
+
+        <div class="looks">
+          <article class="look reveal">
+            <svg class="look__icono" viewBox="0 0 64 120" aria-hidden="true">
+              <path d="M22 6 L26 6 L32 20 L38 6 L42 6 L40 42 L56 114 L8 114 L24 42 Z"/>
+              <path d="M24 42 L40 42"/><path d="M32 20 L32 42" opacity=".4"/>
+            </svg>
+            <h4>Ellas</h4>
+            <ul>
+              <li class="si">Vestido largo o midi</li>
+              <li class="si">Mono de gala</li>
+              <li class="si">Tacos o sandalias finas</li>
+              <li class="no">Vestidos blancos o marfil</li>
+              <li class="no">Looks muy cortos o casuales</li>
+            </ul>
+          </article>
+
+          <article class="look reveal">
+            <svg class="look__icono" viewBox="0 0 64 120" aria-hidden="true">
+              <path d="M20 12 L32 20 L44 12 L56 26 L50 112 L14 112 L8 26 Z"/>
+              <path d="M32 20 L32 74"/>
+              <path d="M32 20 L26 34 L32 44 L38 34 Z" opacity=".6"/>
+              <path d="M32 44 L29 66 L32 74 L35 66 Z" opacity=".6"/>
+            </svg>
+            <h4>Ellos</h4>
+            <ul>
+              <li class="si">Traje oscuro con corbata o moño</li>
+              <li class="si">Camisa clara, zapatos de vestir</li>
+              <li class="si">Saco y pantalón a tono</li>
+              <li class="no">Zapatillas o jeans</li>
+              <li class="no">Remeras o bermudas</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         REGALOS · SECCIÓN EXCLUSIVA (con código de invitación)
+         ========================================================== -->
+    <section class="seccion seccion--rosa" id="regalos">
+      <div class="contenedor contenedor--medio">
+        <p class="eyebrow reveal">Sección exclusiva para invitados</p>
+        <h2 class="titulo reveal">Mesa de regalos</h2>
+        <p class="texto-centro reveal">
+          Tu presencia es nuestro mejor regalo. Si querés acompañarnos además con un detalle,
+          lo vamos a recibir con muchísimo cariño.
+        </p>
+
+        <!-- Puerta: pide el código que figura en la invitación -->
+        <form class="gate reveal" id="gate" hidden>
+          <span class="gate__candado" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M6 10V8a6 6 0 0 1 12 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h1zm2 0h8V8a4 4 0 0 0-8 0v2z"/></svg>
+          </span>
+          <label for="gateCodigo">Ingresá el código de tu invitación</label>
+          <div class="gate__fila">
+            <input type="text" id="gateCodigo" autocomplete="off" autocapitalize="characters" spellcheck="false">
+            <button class="boton boton--oro" type="submit">Entrar</button>
+          </div>
+          <p class="gate__ayuda" id="gateAyuda"></p>
+          <p class="gate__error" id="gateError" role="alert"></p>
+        </form>
+
+        <div class="regalos" id="regalosContenido" hidden>
+          <div class="regalos__grid" id="regalosGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         RSVP AUTOMATIZADO
+         ========================================================== -->
+    <section class="seccion seccion--oscura" id="rsvp">
+      <div class="contenedor contenedor--angosto">
+        <p class="eyebrow eyebrow--claro reveal">Confirmá tu asistencia</p>
+        <h2 class="titulo titulo--claro reveal">¿Nos acompañás?</h2>
+        <p class="texto-centro texto-centro--claro reveal">
+          Por favor confirmá antes del <strong data-fill="rsvpLimite">20 de febrero</strong>.
+          Vas a recibir un mail con tu confirmación.
+        </p>
+
+        <form class="form reveal" id="formRsvp" novalidate>
+          <div class="campo">
+            <label for="nombre">Nombre y apellido</label>
+            <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+          </div>
+
+          <div class="campo">
+            <label for="email">Email (te enviamos la confirmación)</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+
+          <fieldset class="campo campo--radios">
+            <legend>¿Vas a venir?</legend>
+            <label class="radio"><input type="radio" name="asistencia" value="Sí, asisto" checked><span>Sí, ahí estaré</span></label>
+            <label class="radio"><input type="radio" name="asistencia" value="No puedo asistir"><span>No puedo ir</span></label>
+          </fieldset>
+
+          <div id="rsvpExtra">
+            <div class="campo">
+              <label for="cantidad">Cantidad de personas (contandote a vos)</label>
+              <select id="cantidad" name="cantidad"></select>
+            </div>
+            <div class="campo">
+              <label for="menu">Restricciones alimentarias</label>
+              <select id="menu" name="menu">
+                <option>Ninguna</option><option>Vegetariano</option><option>Vegano</option>
+                <option>Celíaco (sin TACC)</option><option>Otra (aclaralo abajo)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label for="mensaje">Mensaje para los novios (opcional)</label>
+            <textarea id="mensaje" name="mensaje" rows="3"></textarea>
+          </div>
+
+          <button class="boton boton--oro boton--bloque" id="btnEnviar" type="submit">Enviar confirmación</button>
+          <p class="form__estado" id="rsvpEstado" role="status"></p>
+        </form>
+
+        <!-- Entrada de confirmación (se arma por JS al enviar) -->
+        <div class="ticket" id="ticket" hidden></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="footer__script"><span data-fill="novia">Sofía</span> & <span data-fill="novio">Matías</span></p>
+      <p class="footer__fecha" data-fill="fechaCorta">20 · 03 · 2027</p>
+      <p class="footer__firma">Hecho con ♥ por <strong>InviGo</strong> · Edición Premium</p>
+    </footer>
+
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Orden importa: primero los datos, después las funciones, al final la lógica -->
+  <script src="config.js"></script>
+  <script src="comun.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
